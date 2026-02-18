@@ -1,0 +1,19 @@
+services:
+
+  mcp:
+    build: ./mcp_server
+    container_name: mcp
+    ports:
+      - "8001:8001"
+    env_file:
+      - ./mcp_server/.env
+
+  backend:
+    build: ./backend
+    container_name: agentic-backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mcp
+    env_file:
+      - ./backend/.env
